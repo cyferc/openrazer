@@ -303,3 +303,16 @@ class RazerKrakenUltimate(__RazerDevice):
             _dbus_chroma.set_breath_triple_effect(self, *args)
 
         self.disable_notify = False
+
+
+class RazerBlacksharkV2(__RazerDevice):
+    """
+    Class for the Razer Blackshark V2
+    """
+    EVENT_FILE_REGEX = re.compile(r'.*Razer_USB_Sound_Card_0+-event-if03')
+
+    USB_VID = 0x1532
+    USB_PID = 0x0529
+    METHODS = ['get_device_type_headset']
+
+    DEVICE_IMAGE = "https://assets3.razerzone.com/Voicme_nDVxB9ag323x-45tDq4U=/1500x1000/https%3A%2F%2Fhybrismediaprod.blob.core.windows.net%2Fsys-master-phoenix-images-container%2Fh0d%2Fh94%2F9072725590046%2FPhoenix-Gallery-Blackshark-V2-X-1500x1000-4.jpg"

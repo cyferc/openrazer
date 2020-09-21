@@ -234,6 +234,10 @@ static ssize_t razer_attr_read_device_type(struct device *dev, struct device_att
         device_type = "Razer Kraken Ultimate\n";
         break;
 
+    case USB_DEVICE_ID_RAZER_BLACKSHARK_V2:
+        device_type = "Razer Blackshark V2 HEHE\n";
+        break;
+
     default:
         device_type = "Unknown Device\n";
     }
@@ -721,6 +725,7 @@ static void razer_kraken_init(struct razer_kraken_device *dev, struct usb_interf
     case USB_DEVICE_ID_RAZER_KRAKEN_CLASSIC:
     case USB_DEVICE_ID_RAZER_KRAKEN_CLASSIC_ALT:
     case USB_DEVICE_ID_RAZER_KRAKEN:
+    //case USB_DEVICE_ID_RAZER_BLACKSHARK_V2:
         dev->led_mode_address = RAINIE_SET_LED_ADDRESS;
         dev->custom_address = RAINIE_CUSTOM_ADDRESS_START;
         dev->breathing_address[0] = RAINIE_BREATHING1_ADDRESS_START;
@@ -763,6 +768,7 @@ static int razer_kraken_probe(struct hid_device *hdev, const struct hid_device_i
         switch(dev->usb_pid) {
         case USB_DEVICE_ID_RAZER_KRAKEN_CLASSIC:
         case USB_DEVICE_ID_RAZER_KRAKEN_CLASSIC_ALT:
+        case USB_DEVICE_ID_RAZER_BLACKSHARK_V2:
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_none);            // No effect
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_static);          // Static effect
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_current_effect);         // Get current effect
@@ -823,6 +829,7 @@ static void razer_kraken_disconnect(struct hid_device *hdev)
         switch(dev->usb_pid) {
         case USB_DEVICE_ID_RAZER_KRAKEN_CLASSIC:
         case USB_DEVICE_ID_RAZER_KRAKEN_CLASSIC_ALT:
+        case USB_DEVICE_ID_RAZER_BLACKSHARK_V2:
             device_remove_file(&hdev->dev, &dev_attr_matrix_effect_none);            // No effect
             device_remove_file(&hdev->dev, &dev_attr_matrix_effect_static);          // Static effect
             device_remove_file(&hdev->dev, &dev_attr_matrix_current_effect);         // Get current effect
@@ -857,6 +864,7 @@ static int razer_raw_event(struct hid_device *hdev, struct hid_report *report, u
 
     } else {
         printk(KERN_WARNING "razerkraken: Got raw message, length: %d\n", size);
+        printk(KERN_WARNING "razerkraken: CCC memememem Got raw message, length: %d\n", size);
     }
 
     return 0;
@@ -871,6 +879,7 @@ static const struct hid_device_id razer_devices[] = {
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_V2) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_ULTIMATE) },
+    { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLACKSHARK_V2) },
     { 0 }
 };
 

@@ -16,7 +16,7 @@
 
 #define DRIVER_VERSION "2.8.0"
 #define DRIVER_LICENSE "GPL v2"
-#define DRIVER_AUTHOR "Terry Cain <terry@terrys-home.co.uk>"
+#define DRIVER_AUTHOR "Christiaan"
 
 
 // Macro to create device files
